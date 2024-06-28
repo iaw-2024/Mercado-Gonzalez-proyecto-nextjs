@@ -15,6 +15,7 @@ import NotFound from "@/app/not-found";
 
 const AdminCategoriesPanel = () => {
   const {
+    setSearch,
     categories,
     getCategories,
     createCategory,
@@ -36,6 +37,7 @@ const AdminCategoriesPanel = () => {
   const [admin, setAdmin] = useState<boolean>(false);
 
   useEffect(() => {
+    setSearch("");
     getCategories();
     setAdmin(session ? isAdmin(session) : false);
   }, []);
@@ -135,7 +137,7 @@ const AdminCategoriesPanel = () => {
                   value={searchTerm}
                   onChange={(e) => {
                     setSearchTerm(e.target.value);
-                    setCurrentPage(1); // Volver a la página 1 cuando se busca
+                    setCurrentPage(1);
                   }}
                   placeholder="Buscar Categoría"
                   className="w-full p-2 pl-10 border border-gray-300 rounded"
@@ -193,28 +195,32 @@ const AdminCategoriesPanel = () => {
                       </td>
                       <td className="px-4 py-3">
                         <div className="flex items-center justify-end space-x-3">
-                          <button
-                            type="button"
-                            onClick={() => {
-                              setSelectedCategory(category);
-                              setEditCategoriesModal(true);
-                            }}
-                            className="flex items-center justify-center text-green-600 bg-green-100 hover:bg-green-200 focus:ring-4 focus:ring-green-300 border border-green-300 rounded-lg text-sm font-medium px-4 py-2"
-                          >
-                            <FaEdit className="mr-2" />
-                            Editar
-                          </button>
-                          <button
-                            type="button"
-                            onClick={() => {
-                              setSelectedCategory(category);
-                              setDeleteCategoriesModal(true);
-                            }}
-                            className="flex items-center justify-center text-red-600 bg-red-100 hover:bg-red-200 focus:ring-4 focus:ring-red-300 border border-red-300 rounded-lg text-sm font-medium px-4 py-2"
-                          >
-                            <FaRegTrashAlt className="mr-2" />
-                            Eliminar
-                          </button>
+                          {category.nombre !== "Sin categoria" && (
+                            <>
+                              <button
+                                type="button"
+                                onClick={() => {
+                                  setSelectedCategory(category);
+                                  setEditCategoriesModal(true);
+                                }}
+                                className="flex items-center justify-center text-green-600 bg-green-100 hover:bg-green-200 focus:ring-4 focus:ring-green-300 border border-green-300 rounded-lg text-sm font-medium px-4 py-2"
+                              >
+                                <FaEdit className="mr-2" />
+                                Editar
+                              </button>
+                              <button
+                                type="button"
+                                onClick={() => {
+                                  setSelectedCategory(category);
+                                  setDeleteCategoriesModal(true);
+                                }}
+                                className="flex items-center justify-center text-red-600 bg-red-100 hover:bg-red-200 focus:ring-4 focus:ring-red-300 border border-red-300 rounded-lg text-sm font-medium px-4 py-2"
+                              >
+                                <FaRegTrashAlt className="mr-2" />
+                                Eliminar
+                              </button>
+                            </>
+                          )}
                         </div>
                       </td>
                     </tr>

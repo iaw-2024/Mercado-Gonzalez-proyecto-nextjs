@@ -30,7 +30,7 @@ const CartComponent = () => {
     if (session && session.user && session.user.user_id) {
       getCartByUserId(session.user.user_id);
     }
-  }, [session, getCartByUserId]);
+  }, [session]);
 
   let sum = 0;
   cart.forEach((p) => (sum += p.price * p.quantity));

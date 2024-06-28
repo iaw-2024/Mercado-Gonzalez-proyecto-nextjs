@@ -15,11 +15,13 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { useRouter } from "next/navigation";
 import { signIn } from "next-auth/react";
 import { useSession } from "next-auth/react";
+import { useGlobalContext } from "@/context/StoreProvider";
 
 const defaultTheme = createTheme();
 const backgroundImage = "/Signin.webp";
 
 export default function SignInSide() {
+  const { setSearch } = useGlobalContext();
   const router = useRouter();
   const { data: session } = useSession();
 
@@ -83,6 +85,10 @@ export default function SignInSide() {
       setFormErrors(newErrors);
     }
   };
+
+  React.useEffect(() => {
+    setSearch("");
+  });
 
   React.useEffect(() => {
     if (session) {

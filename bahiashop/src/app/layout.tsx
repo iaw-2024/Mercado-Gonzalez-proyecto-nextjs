@@ -6,6 +6,7 @@ import Navbar from "@/components/layouts/Navbar";
 import { AppProvider } from "@/context/StoreProvider";
 import SessionWrapper from "@/context/SessionWrapper";
 import { Footer } from "@/components/layouts/Footer";
+import { ToastContainer } from "react-toastify";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -30,6 +31,7 @@ export default function RootLayout({
             )}
           >
             <main className="relative flex flex-col min-h-screen">
+              <ToastContainer />
               <Navbar />
               <div className="flex-grow flex-1">
                 <div className="mb-8"></div>

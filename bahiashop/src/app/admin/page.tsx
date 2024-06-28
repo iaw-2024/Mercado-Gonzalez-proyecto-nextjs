@@ -8,12 +8,15 @@ import { isAdmin } from "@/lib/utils";
 import NotFound from "@/app/not-found";
 import { useSession } from "next-auth/react";
 import { useEffect, useState } from "react";
+import { useGlobalContext } from "@/context/StoreProvider";
 
 const AdminPanel = () => {
+  const { setSearch } = useGlobalContext();
   const { data: session } = useSession();
   const [admin, setAdmin] = useState<boolean>(false);
 
   useEffect(() => {
+    setSearch("");
     setAdmin(session ? isAdmin(session) : false);
   });
 

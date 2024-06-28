@@ -30,11 +30,11 @@ export function ProductCard() {
     setCurrentPage(1);
   }, [search]);
 
-  useEffect(() => {
+  /*useEffect(() => {
     if (session && session.user && session.user.user_id) {
       getCartByUserId(session.user.user_id);
     }
-  }, [session, getCartByUserId]);
+  }, [session]);*/
 
   const filteredProducts = search
     ? productos.filter((product) =>

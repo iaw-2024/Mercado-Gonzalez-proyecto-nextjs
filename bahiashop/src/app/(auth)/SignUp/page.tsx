@@ -20,7 +20,7 @@ import { useSession } from "next-auth/react";
 function SignUp() {
   const router = useRouter();
   const { data: session } = useSession();
-  const { addUser } = useGlobalContext();
+  const { addUser, setSearch } = useGlobalContext();
   const [formData, setFormData] = useState({
     nombre: "",
     apellido: "",
@@ -89,6 +89,10 @@ function SignUp() {
       setFormErrors(newErrors);
     }
   };
+
+  React.useEffect(() => {
+    setSearch("");
+  });
 
   React.useEffect(() => {
     if (session) {

@@ -8,11 +8,13 @@ import Cart from "../cart/Cart";
 import { signOut, useSession } from "next-auth/react";
 import { useRouter, usePathname } from "next/navigation";
 import { isAdmin } from "@/lib/utils";
-import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Image from "next/image";
+import { useGlobalContext } from "@/context/StoreProvider";
+import { toast } from "react-toastify";
 
 const Navbar = () => {
+  const { setSearch } = useGlobalContext();
   const { data: session } = useSession();
   const router = useRouter();
   const pathname = usePathname();
@@ -26,6 +28,8 @@ const Navbar = () => {
   // Función para manejar el cierre de sesión
   const handleSignOut = async () => {
     await signOut({ redirect: false });
+    setSearch("");
+    toast.success("Has cerrado sesión con éxito.");
     router.push("/");
   };
 
@@ -64,7 +68,6 @@ const Navbar = () => {
                     </button>
                     <div className="ml-4 flow-root lg:ml-6">
                       <Cart />
-                      <ToastContainer />
                     </div>
                   </>
                 ) : (
